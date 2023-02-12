@@ -5,7 +5,6 @@ namespace controllers;
 use core\BaseController;
 use helpers\Helpers;
 use JetBrains\PhpStorm\NoReturn;
-use models\Surveys;
 use models\User;
 
 class SurveysController extends BaseController

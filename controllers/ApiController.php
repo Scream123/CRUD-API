@@ -4,6 +4,7 @@ namespace controllers;
 
 use core\BaseController;
 use helpers\Helpers;
+use JetBrains\PhpStorm\NoReturn;
 use models\Surveys;
 use models\User;
 
@@ -12,7 +13,7 @@ class ApiController extends BaseController
     /**
      * @throws \Exception
      */
-    public function actionIndex()
+    #[NoReturn] public function actionIndex()
     {
         $db = new Surveys();
         $surveyData = [];
