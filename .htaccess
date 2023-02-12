@@ -1,0 +1,16 @@
+AddDefaultCharset utf-8
+Options +FollowSymLinks
+#turn on mod_rewrite
+RewriteEngine on
+RewriteBase /
+
+# Prohibiting the listing of an empty directory
+Options -Indexes
+# When accessing the directory, a file opens index.php
+DirectoryIndex index.php
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php [L,QSA]

@@ -1,0 +1,41 @@
+html, body {
+    ᅠᅠheight: 100%;
+}
+#footer{
+    height: 20px;
+background-color: grey;
+    color: white;
+    width: 100%;
+
+}
+.messageShow{
+    position: fixed;
+    font-size: 12px;
+    padding-top: 40px;
+    clear: both;
+    color:red;
+}
+#register-btn{
+    margin-top: 10px;
+}
+#login-btn{
+    margin-top: 10px;
+}
+#createSurveyBtn, #surveyTitleFilter,#filterSearchTitleBtn,#statusFilter,#filterStatusBtn{
+    margin-right: 10px;
+
+}
+#blockFilterMessage{
+    position: fixed;
+    margin: auto;
+}
+.authenticationBlock{
+    text-align: center;
+}
+#loginBtn, #registerBtn{
+    margin-top: 10px;
+}
+#filterStatusBtn{
+    margin-top: 5px;
+
+}
