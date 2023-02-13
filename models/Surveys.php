@@ -24,15 +24,24 @@ class Surveys
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function createAnswer($answer, $surveyId, $votes)
+    /**
+     * @param $answerData
+     * @param $surveyId
+     * @return bool|\PDOStatement
+     */
+    public function createAnswer($answerData, $surveyId): bool|\PDOStatement
     {
-        $stmt = $this->getDbConnect()->prepare(
-            'INSERT INTO answers(`title`, `survey_id`,`number_votes`) VALUES (?, ?, ?)'
-        );
+        $sql = [];
+        foreach ($answerData as $answerKey => $valueVote) {
+            $sql[] ="('".$answerKey . "',". $surveyId ."," . $valueVote.")";
+        }
+        $query  =
+            "INSERT INTO answers(`title`, `survey_id`,`number_votes`)
+             VALUES "  . implode(',' , $sql)." ";
 
-        $stmt->execute([$answer, $surveyId, $votes]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return  $this->getDbConnect()->query($query);
     }
+
 
     /**
      * @param $id

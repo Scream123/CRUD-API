@@ -101,7 +101,7 @@ class SurveysController extends BaseController
                 $this->getUser()->auth($user['id']);
                 $resData['user_name'] = $user['name'];
                 $resData['success'] = 1;
-                $resData['message'] = "Вы успешно авторизировались!</p>";
+                $resData['message'] = "Вы успешно авторизировались!";
             }
         } else {
             $resData['success'] = 0;

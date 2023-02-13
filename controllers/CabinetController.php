@@ -70,9 +70,7 @@ class CabinetController extends BaseController
             }
             $db->createSurvey($title, $user_id, $status, $date_published);
             $surveyData = $db->getLastSurvey($user_id);
-            foreach ($surveys as $answerKey => $valueVote) {
-                $db->createAnswer($answerKey, $surveyData['id'], $valueVote);
-            }
+           $db->createAnswer($surveys, $surveyData['id']);
             $lastSurveyData = $db->getLastSurveyData($user_id);
 
             $resData['surveyList'] = $lastSurveyData;
@@ -100,6 +98,72 @@ class CabinetController extends BaseController
         $this->view->render('cabinet/editSurvey', $surveyData);
 
         return true;
+    }
+
+    /**
+     * @param $id
+     * @return void
+     */
+    #[NoReturn] public function actionUpdateSurvey($id): void
+    {
+        $resData = [];
+        $surveyId = (int)$id;
+        $survey_title = Helpers::clearData($_POST['surveyTitle']);
+        $answers = $_POST['answer'];
+        foreach ($answers as $answer){
+            if ($answer['title'] === '') {
+                $resData['success'] = 0;
+                $resData['message'] = 'Введите ответ!';
+                $resData['error'] = 'Введите ответ!';
+                echo json_encode($resData, JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+            if ($answer['votes'] === '') {
+                $resData['success'] = 0;
+                $resData['error'] = 'Введите количество голосов числом!';
+                echo json_encode($resData, JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+        }
+        $status = $_POST['status'];
+        $date_published = date('Y-m-d H:i:s');
+        $user_id = $_SESSION['user'];
+
+        if ($survey_title === '') {
+            $resData['success'] = 0;
+            $resData['error'] = 'Введите название вопроса!';
+            echo json_encode($resData, JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+
+        if ($status === '') {
+            $resData['success'] = 0;
+            $resData['error'] = 'Выберите статус!';
+            echo json_encode($resData, JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+        if (count($resData) === 0) {
+
+            $db = new Surveys();
+//
+            $db->updateSurvey(
+                $surveyId,
+                $user_id,
+                $survey_title,
+                $status,
+                $date_published,
+            );
+            foreach ($answers as $answerId => $answer) {
+                $db->updateAnswer($surveyId,$answerId, $answer['title'], $answer['votes']);
+            }
+            $resData['success'] = 1;
+            $resData['message'] = "Опрос успешно обновлен!";
+        } else {
+            $resData['success'] = 0;
+            $resData['error'] = 'Ошибка при обновления опроса!';
+        }
+        echo json_encode($resData, JSON_UNESCAPED_UNICODE);
+        exit;
     }
 
     /**

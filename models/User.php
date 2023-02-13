@@ -141,6 +141,20 @@ class User
     }
 
     /**
+     * @param $token
+     * @return mixed
+     */
+    public function  getUserIdByToken($token): mixed
+    {
+        $sql = "SELECT `id` FROM users WHERE token = :token";
+        $result = $this->getDbConnect()->prepare($sql);
+        $result->bindParam(':token', $token, PDO::PARAM_INT);
+        $result->execute();
+
+        return  $result->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * @param $name
      * @param $email
      * @return bool
@@ -226,6 +240,7 @@ class User
 
         return $result->fetch();
     }
+
     /**
      * @return PDO|void
      */

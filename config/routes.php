@@ -1,8 +1,12 @@
 <?php
 return [
+    'api/login' => [
+        'controller' => 'api',
+        'action' => 'login',
+    ],
     'api/surveys' => [
         'controller' => 'api',
-        'action' => 'index',
+        'action' => 'surveys',
     ],
     'surveys' =>[
         'controller' => 'surveys',
@@ -57,19 +61,3 @@ return [
         'action' => 'register',
     ],
 ];
-//return [
-//    'surveys' => 'surveys/list',
-//    'register' => 'surveys/register',
-//    'login' => 'surveys/login',
-//    'logout' => 'surveys/logout',
-//    'cabinet/deletedSurvey' => 'cabinet/deletedSurvey',
-//    'cabinet/updateSurvey/([0-9]+)' => 'cabinet/updateSurvey/$1',
-//    'cabinet/edit/([0-9]+)' => 'cabinet/edit/$1',
-//        'cabinet/searchSurveyByStatus' => 'cabinet/searchSurveyByStatus',
-//    'cabinet/searchSurveyByTitle' => 'cabinet/searchSurveyByTitle',
-//    'cabinet/addSurvey' => 'cabinet/addSurvey',
-//    'cabinet' => 'cabinet/index',
-////   '^$' => 'surveys/list',
-//    '^$' => [SurveysController::class, 'actionList'],
-//
-//];

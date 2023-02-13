@@ -26,11 +26,11 @@
                         ?>
                         <?php
                         foreach ($data['answers'] as $answerId => $answerParam): ?>
-                            <tr class="surveysTr" data-id="<?= $data['survey_id'] ?>">
+                            <tr class="surveysTr surveysTr_<?= $data['survey_id'] ?>" data-id="<?= $data['survey_id'] ?>">
                                 <?php
                                 if ($rowNumber == 0): ?>
                                     <td class="survey_id"
-                                        data-id="<?= $_SESSION['user'] ?>" rowspan="<?= count($data['answers']) ?>">
+                                        data-id="<?= $data['survey_id'] ?>" rowspan="<?= count($data['answers']) ?>">
                                         <?= $data['survey_id'] ?>
                                         <span class="messageShow"></span>
                                         <input type="hidden" name="surveyId" value="<?=$data['survey_id']?>">
