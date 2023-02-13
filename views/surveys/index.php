@@ -116,5 +116,4 @@ use models\User;
         </div><!--/header-middle-->
     </header><!--/header-->
     </div>
-
 <?php

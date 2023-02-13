@@ -63,6 +63,7 @@ class CabinetController extends BaseController
             $surveys = [];
             foreach ($answer as $key => $value) {
                 foreach ($votes as $keyVote => $voteValue) {
+
                     if ($key === $keyVote) {
                         $surveys[$value] = $voteValue;
                     }
@@ -90,10 +91,8 @@ class CabinetController extends BaseController
      */
     public function actionEdit($id): bool
     {
-        $resData = [];
         $db = new Surveys();
         $surveyCollection = $db->getSurveyById((int)$id);
-        $surveyData = [];
         $surveyData = $this->getArr($surveyCollection);
         $this->view->render('cabinet/editSurvey', $surveyData);
 
@@ -111,6 +110,7 @@ class CabinetController extends BaseController
         $survey_title = Helpers::clearData($_POST['surveyTitle']);
         $answers = $_POST['answer'];
         foreach ($answers as $answer){
+
             if ($answer['title'] === '') {
                 $resData['success'] = 0;
                 $resData['message'] = 'Введите ответ!';
@@ -118,6 +118,7 @@ class CabinetController extends BaseController
                 echo json_encode($resData, JSON_UNESCAPED_UNICODE);
                 exit;
             }
+
             if ($answer['votes'] === '') {
                 $resData['success'] = 0;
                 $resData['error'] = 'Введите количество голосов числом!';
@@ -142,17 +143,10 @@ class CabinetController extends BaseController
             echo json_encode($resData, JSON_UNESCAPED_UNICODE);
             exit;
         }
-        if (count($resData) === 0) {
 
+        if (count($resData) === 0) {
             $db = new Surveys();
-//
-            $db->updateSurvey(
-                $surveyId,
-                $user_id,
-                $survey_title,
-                $status,
-                $date_published,
-            );
+            $db->updateSurvey($surveyId, $user_id, $survey_title, $status, $date_published,);
             foreach ($answers as $answerId => $answer) {
                 $db->updateAnswer($surveyId,$answerId, $answer['title'], $answer['votes']);
             }
@@ -298,6 +292,4 @@ class CabinetController extends BaseController
         }
         return $resData;
     }
-
-
 }

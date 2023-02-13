@@ -12,7 +12,6 @@ abstract class BaseController
     public function __construct($route)
     {
         $this->route = $route;
-        //$this->view = new View($route);
         $this->view = new View();
     }
 }
