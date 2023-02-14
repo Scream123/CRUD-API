@@ -68,7 +68,7 @@ class Surveys
     {
         $sql = "SELECT * FROM `surveys` WHERE `user_id` = '{$user_id}' ORDER BY `id` DESC LIMIT 1";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
+
         return $result->fetchAll()[0];
     }
 
@@ -87,7 +87,7 @@ class Surveys
                 SELECT `id` FROM `surveys` WHERE `user_id` = '{$user_id}' ORDER BY `id` DESC LIMIT 1
                 )";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
+
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -102,7 +102,7 @@ class Surveys
                 WHERE  `deleted_at` IS NULL AND s.`user_id` = {$user_id}
                  ORDER BY a.`survey_id`";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
+
         return $result->fetchAll();
     }
 
@@ -180,8 +180,6 @@ class Surveys
                 WHERE  `deleted_at` IS NULL AND s.`title` = '{$surveyTitle}' AND s.`user_id` = {$user_id}   
                  ORDER BY s.`id` ";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
-
         return $result->fetchAll();
     }
 
@@ -199,8 +197,7 @@ class Surveys
                 WHERE  `deleted_at` IS NULL AND s.`status` = {$surveyStatus} AND s.`user_id` = {$user_id} 
                  ORDER BY s.`id` ";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
-        return $result->fetchAll();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -217,7 +214,6 @@ class Surveys
                 WHERE  `deleted_at` IS NULL AND s.`date_published` = '{$surveyDate}' AND s.`user_id` = {$user_id} 
                  ORDER BY s.`id` ";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
 
         return $result->fetchAll();
     }
@@ -235,7 +231,6 @@ class Surveys
                 WHERE  `deleted_at` IS NULL AND  s.`user_id` = {$user_id}
                  ORDER BY  s.`id`";
         $result = $this->getDbConnect()->query($sql);
-        $result->execute();
 
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }

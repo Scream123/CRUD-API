@@ -84,9 +84,9 @@
                                 </td>
                                 <td class="surveyAction" rowspan="<?= count($data['answers']); ?>">
                                     <button type="submit"
-                                            data-id="<?= $data['survey_id']; ?>" class="btn btn-success surveyEdit"><i
+                                            data-id="<?= $data['survey_id']; ?>" title="Редактировать" class="btn btn-success surveyEdit"><i
                                                 class="fa fa-edit"></i></button>
-                                    <button type="submit" class="btn btn-danger surveyDelete"><i
+                                    <button type="submit" title="Удалить" class="btn btn-danger surveyDelete"><i
                                                 class="fa fa-trash-alt"></i></button>
                                 </td>
                             <?php
